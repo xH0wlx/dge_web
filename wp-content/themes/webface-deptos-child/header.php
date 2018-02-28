@@ -76,7 +76,7 @@
 							<div class="content-logo col-xs-12">
 								<div class="logo">
 									<a target="blank" href="http://ubiobio.cl" title="Ir al sitio de la UBB"><img class="logoubb" src="<?php echo get_template_directory_uri(); ?>/images/logoubb.png" alt="Logo"></a>
-									<a itemprop="url" href="<?php echo get_site_url(); ?>"><img  itemprop="logo" class="logoface" src="<?php echo get_template_directory_uri(); ?>/images/logo.png" alt="Logo"></a>
+									<a itemprop="url" href="<?php echo get_site_url(); ?>"><img  itemprop="logo" class="logoface" src="<?php echo get_stylesheet_directory_uri(); ?>/images/logo-inverted.png" alt="Logo"></a>
 								</div>
 							</div>
 							<?php /*logo*/;?>
