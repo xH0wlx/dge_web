@@ -20,26 +20,22 @@
 
 // ** MySQL settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define('DB_NAME', 'gestionemp');
+define('DB_NAME', 'gestionemp_second');
 
 /** MySQL database username */
-define('DB_USER', 'gestionemp');
+define('DB_USER', 'root');
 
 /** MySQL database password */
-define('DB_PASSWORD', '*WpZ,zZX94k!');
+define('DB_PASSWORD', '');
 
 /** MySQL hostname */
-define('DB_HOST', 'mysql.dci.ubiobio.cl');
+define('DB_HOST', 'localhost');
 
 /** Database Charset to use in creating database tables. */
 define('DB_CHARSET', 'utf8');
 
 /** The Database Collate type. Don't change this if in doubt. */
 define('DB_COLLATE', '');
-
-/** Para el smtp */
-define( 'WPMS_ON', true );
-define( 'WPMS_SMTP_PASS', 'asface@2016' );
 
 /**#@+
  * Authentication Unique Keys and Salts.
