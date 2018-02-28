@@ -1,0 +1,6 @@
+#Directorios de Wordpress a ignorar
+/wp-admin
+/wp-includes
+/wp-content/languages
+/wp-content/plugins
+/wp-content/uploads

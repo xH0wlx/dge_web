@@ -1,0 +1,115 @@
+/*
+ Theme Name:   Webface Deptos Child
+ Theme URI:    http://webface.ubiobio.cl
+ Description:  Webface Deptos Child Theme
+ Author:       Luis Muñoz
+ Author URI:   http://ubiobio.cl
+ Template:     webface-deptos
+ Version:      1.0.0
+ Text Domain:  webface-deptos-child
+*/
+@import url("../webface-deptos/style.css");
+
+/*-------------------------------------------------------------- 
+# estructure
+-------------------------------------------------------------- */
+
+.structure-box {
+    border-top: 1px solid #f1f1f1;
+    border-right: none !important;
+    border-bottom: none !important;
+}
+
+/*--------------------------------------------------------------
+# menú full
+--------------------------------------------------------------*/
+.menu-full {height: 30px; text-transform: uppercase; text-align: center; /* just to give some spacing */
+}
+.menu-full ul    {
+    margin: 0; padding: 0; display: inline-block; z-index: 999999 /* only needed if you have not done a CSS reset */
+}
+.menu-full li    {
+    display: block;
+    float: left;
+    line-height: 30px; /* this should be the same as your .menu-full height */
+    margin: 0; padding: 0; /* only needed if you don't have a reset */
+    position: relative; /* this is needed in order to position sub menus */
+}
+.menu-full li a  {
+    display: block;
+    line-height: 30px;
+    padding: 9px 20px;
+    color: #fff
+}
+.menu-full .current-menu-item a, .menu-full .current_page_item a, .menu-full a:hover {
+    color: #fff; 
+}
+.menu-full ul ul { /* this targets all sub menus */
+    display: none; /* hide all sub menus from view */
+    position: absolute;
+    background-color: #ff982c;
+    top: 44px; /* this should be the same height as the top level menu -- height + padding + borders */
+}
+.menu-full ul ul li { /* this targets all submenu items */
+    float: none; /* overwriting our float up above */
+    width: 200px; /* set to the width you want your sub menus to be. This needs to match the value we set below */
+    text-align: left;
+    border-top: 1px solid #fda548;
+}
+.menu-full ul ul li a { /* target all sub menu item links */
+    padding: 5px 20px; /* give our sub menu links a nice button feel */
+    line-height: 25px;
+    font-size: 0.9em;
+}
+.menu-full ul ul li a:hover {
+    background-color: #ff8300;
+}
+.menu-full ul li:hover > ul {
+    display: block; /* show sub menus when hovering over a parent */
+}
+.menu-full ul ul li ul {
+    /* target all second, third, and deeper level sub menus */
+    left: 150px; /* this needs to match the sub menu width set above -- width + padding + borders */
+    top: 0; /* this ensures the sub menu starts in line with its parent item */
+}
+
+/*--------------------------------------------------------------
+# LINKS
+--------------------------------------------------------------*/
+li.no-bullet:before {
+    content: "" !important;
+    padding-right: 0px !important;
+}
+
+li#adecca {
+    background: url(http://adecca.ubiobio.cl/css/img/favicon.png) no-repeat left;
+    background-size: 16px !important;
+    padding-left: 24px !important;
+}
+
+li#moodle {
+    background: url(http://moodleubb.ubiobio.cl/theme/image.php/more/theme/1458741221/favicon) no-repeat left;
+    background-size: 16px !important;
+    padding-left: 24px !important;
+}
+
+li#ubb {
+    background: url(http://www.ubiobio.cl/favicon.ico) no-repeat left;
+    background-size: 16px !important;
+    padding-left: 24px !important;
+}
+/*--------------------------------------------------------------
+# CONTACTO
+--------------------------------------------------------------*/
+.wpcf7 .cf7s-caspar{
+    border: 0px !important;
+}
+
+/*--------------------------------------------------------------
+# BOTONES PREGRADO POSTGRADO ETC
+--------------------------------------------------------------*/
+.img-botones{
+ background-size: cover;
+ background-position: center; 
+ display: block;
+}
