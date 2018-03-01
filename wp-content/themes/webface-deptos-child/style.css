@@ -10,6 +10,23 @@
 */
 @import url("../webface-deptos/style.css");
 
+/*--------------------------------------------------------------
+# index
+--------------------------------------------------------------*/
+/*menu vinculacion*/
+.down-arrow-corregida {
+    position: relative;
+    left: 35%;
+	width: 0;
+	height: 0;
+	border-left: 25px solid transparent;
+	border-right: 25px solid transparent;
+	border-bottom: 25px solid #fda140;
+	-webkit-transition: ease-out 0.5s;
+	-moz-transition: ease-out 0.5s;
+	-o-transition: ease-out 0.5s;transition: ease-out 0.5s;
+}
+
 /*-------------------------------------------------------------- 
 # estructure
 -------------------------------------------------------------- */
