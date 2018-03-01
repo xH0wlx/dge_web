@@ -135,7 +135,7 @@ class GE_MB_InfoBase extends GE_Metabox{
                       $array[$key][$llave] = sanitize_text_field($valor);
                    }
                 }else{
-                    if( !($key == "link-tesis") || !($key == "link-curriculum")){
+                    if( !($key == "link-tesis") && !($key == "link-curriculum")){
                         $array[$key] = sanitize_text_field($value);
                     }
                 }

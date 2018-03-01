@@ -245,7 +245,7 @@ get_header();
                                         </div>
                                         <div id="ge_collapse_tesis" class="panel-collapse collapse" role="tabpanel" aria-labelledby="ge_heading_tesis">
                                           <div class="panel-body">
-                                              <button type="button" class="btn btn-outline-primary"><strong><a target="_blank" href="<?php echo esc_url($_ge_funcionario[0]['link-tesis']) ?>">Repositorio de Tesis UBB</a></strong></button>
+                                              <button type="button" class="btn btn-outline-primary"><strong><a target="_blank" href="<?php echo esc_url($_ge_funcionario[0]['link-tesis']); ?>">Repositorio de Tesis UBB</a></strong></button>
                                           </div>
                                         </div>
                                       </div>
