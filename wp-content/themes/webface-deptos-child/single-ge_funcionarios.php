@@ -102,6 +102,19 @@ get_header();
                                         <?php     
                                             }
                                           ?>
+                                          
+                                          <?php 
+                                            if( !empty($_ge_funcionario[0]['link-curriculum']) ){
+                                           ?>
+                                          <tr>
+                                              <td><strong>Curriculum Vitae:</strong></td>
+                                              <td>
+                                                  <a href="<?php echo esc_url( $_ge_funcionario[0]['link-curriculum'] ); ?>" class="btn btn-primary btn-block text-white" role="button" target="_blank"><i class="fa fa-download" aria-hidden="true"></i>&nbsp;&nbsp;Descargar</a>
+                                              </td>
+                                          </tr>   
+                                        <?php     
+                                            }
+                                          ?>
                                       </tbody>
                                     </table>
                                     

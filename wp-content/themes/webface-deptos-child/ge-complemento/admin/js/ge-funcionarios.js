@@ -59,12 +59,14 @@ $(document).ready(function() {
            $("#" + post_type_key + "_trabajo_actualidad").show().addClass('bg-animado');
            $("#tagsdiv-ge_area_investigacion").show().addClass('bg-animado');
            $("#link_tesis_dirigidas").show().addClass('bg-animado');
+           $("#curriculum").show().addClass('bg-animado');
        }else{
            $("#" + post_type_key + "_ponencias").hide();
            $("#" + post_type_key + "_proyectos").hide();
            $("#" + post_type_key + "_trabajo_actualidad").hide();
            $("#tagsdiv-ge_area_investigacion").hide();
            $("#link_tesis_dirigidas").hide();
+           $("#curriculum").hide();
        }
     
     
@@ -100,17 +102,62 @@ $(document).ready(function() {
            $("#" + post_type_key + "_trabajo_actualidad").show().addClass('bg-animado');
            $("#tagsdiv-ge_area_investigacion").show().addClass('bg-animado');
            $("#link_tesis_dirigidas").show().addClass('bg-animado');
+           $("#curriculum").show().addClass('bg-animado');
        }else{
            $("#" + post_type_key + "_ponencias").hide();
            $("#" + post_type_key + "_proyectos").hide();
            $("#" + post_type_key + "_trabajo_actualidad").hide();
            $("#tagsdiv-ge_area_investigacion").hide();
            $("#link_tesis_dirigidas").hide();
+           $("#curriculum").hide();
        }
     }); // Fin change event
     
     
     
+    
+   var marco;
+   var btnMarco = $('#btn-curriculum');
+   var btnQuitar = $('#btn-curriculum-limpiar');
+    
+   btnMarco.on('click', function(){
+       
+       if( marco ){
+          marco.open();
+          return;
+       }else{
+           
+           var marco = wp.media({
+               frame: 'select',
+               title: 'Selecciona un Curriculum',
+               button: {
+                   text: 'Usar este Curriculum'
+               },
+               library: {
+                   order: 'ASC',
+                   orderby: 'title',
+                   type: 'application'
+               }
+           });
+           
+           marco.on('select', function(){
+               var elemento = marco.state().get( 'selection' ).first().toJSON();
+               
+               //$('#size-human-curriculum').val(elemento.filesizeHumanReadable);
+               //$('#titulo-curriculum').val(elemento.title);
+               $('#enlace-curriculum').val(elemento.url);
+           });
+           
+           marco.open();
+           
+       }
+       
+       
+   });
+    
+   btnQuitar.on('click', function(){
+     $('#enlace-curriculum').val("");
+   });
     
     
 });

@@ -30,6 +30,7 @@ class GE_MB_InfoBase extends GE_Metabox{
       $email = isset($ge_funcionario['email'])? esc_attr($ge_funcionario['email']) : '';
       $telefono = isset($ge_funcionario['telefono'])? esc_attr($ge_funcionario['telefono']) : '';
       $linkTesis = isset($ge_funcionario['link-tesis'])? esc_url($ge_funcionario['link-tesis']) : '';
+      $linkCurriculum = isset($ge_funcionario['link-curriculum'])? esc_url($ge_funcionario['link-curriculum']) : '';
 /*      $ge_rol = isset($ge_funcionario['ge_rol'])? $ge_funcionario['ge_rol'] : '';
 
         $args = [
@@ -92,6 +93,18 @@ class GE_MB_InfoBase extends GE_Metabox{
                         <label for='link-tesis'>Link de Tesis Dirigidas:</label>
                         <input placeholder="Del sitio http://repobib.ubiobio.cl" style="width:100%;" name='ge_funcionario[link-tesis]' type='text' class='form-control' id='link-tesis' value="<?php echo $linkTesis ?>">
                     </div>
+                    <div class='form-group' style="display: none;" id="curriculum">
+                        <label for='curriculum'>Curriculum Vitae Normalizado (PDF):</label>
+                        <div class="row">
+                            <div class="col-sm-6 col-md-8">
+                                <input name='ge_funcionario[link-curriculum]' type='text' class='form-control' id='enlace-curriculum' value="<?php echo $linkCurriculum ?>"  readonly>
+                            </div>
+                            <div class="col-sm-6 col-md-4">
+                                <button id="btn-curriculum" class="pull-right btn btn-primary" type="button">Añadir CV</button>
+                                <button id="btn-curriculum-limpiar" class="pull-right btn btn-danger" type="button">Quitar CV</button>
+                            </div>
+                        </div>
+                    </div>
 
 <!--                     <div>
                         <label for='ge_rol'>Rol: </label>
@@ -122,7 +135,7 @@ class GE_MB_InfoBase extends GE_Metabox{
                       $array[$key][$llave] = sanitize_text_field($valor);
                    }
                 }else{
-                    if( !($key == "link-tesis") ){
+                    if( !($key == "link-tesis") || !($key == "link-curriculum")){
                         $array[$key] = sanitize_text_field($value);
                     }
                 }
