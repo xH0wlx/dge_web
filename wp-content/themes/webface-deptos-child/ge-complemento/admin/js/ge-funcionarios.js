@@ -58,11 +58,13 @@ $(document).ready(function() {
            $("#" + post_type_key + "_proyectos").show().addClass('bg-animado');
            $("#" + post_type_key + "_trabajo_actualidad").show().addClass('bg-animado');
            $("#tagsdiv-ge_area_investigacion").show().addClass('bg-animado');
+           $("#link_tesis_dirigidas").show().addClass('bg-animado');
        }else{
            $("#" + post_type_key + "_ponencias").hide();
            $("#" + post_type_key + "_proyectos").hide();
            $("#" + post_type_key + "_trabajo_actualidad").hide();
            $("#tagsdiv-ge_area_investigacion").hide();
+           $("#link_tesis_dirigidas").hide();
        }
     
     
@@ -97,11 +99,13 @@ $(document).ready(function() {
            $("#" + post_type_key + "_proyectos").show().addClass('bg-animado');
            $("#" + post_type_key + "_trabajo_actualidad").show().addClass('bg-animado');
            $("#tagsdiv-ge_area_investigacion").show().addClass('bg-animado');
+           $("#link_tesis_dirigidas").show().addClass('bg-animado');
        }else{
            $("#" + post_type_key + "_ponencias").hide();
            $("#" + post_type_key + "_proyectos").hide();
            $("#" + post_type_key + "_trabajo_actualidad").hide();
            $("#tagsdiv-ge_area_investigacion").hide();
+           $("#link_tesis_dirigidas").hide();
        }
     }); // Fin change event
     

@@ -218,24 +218,25 @@ get_header();
                                    }// IF PONENCIAS
                                    ?>
                                    
-                                                                     <?php
-                                   if( !empty( get_the_title()) ){
-                                    ?>  
-                                   <div class="panel panel-default">
-                                    <div class="panel-heading" role="tab" id="ge_heading_tesis">
-                                      <h4 class="panel-title">
-                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#ge_collapse_tesis" aria-expanded="false" aria-controls="ge_collapse_tesis">
-                                          <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Tesis Dirigidas
-                                        </a>
-                                      </h4>
-                                    </div>
-                                    <div id="ge_collapse_tesis" class="panel-collapse collapse" role="tabpanel" aria-labelledby="ge_heading_tesis">
-                                      <div class="panel-body">
-                                        <strong><a href="http://repobib.ubiobio.cl/jspui/browse?type=author&order=ASC&rpp=20&starts_with=<?php echo get_the_title(); ?>">Repositorio de Tesis UBB</a></strong>
+                                   <?php
+
+                                   if( !empty($_ge_funcionario[0]['link-tesis']) ){  
+                                    ?>       
+                                       <div class="panel panel-default">
+                                        <div class="panel-heading" role="tab" id="ge_heading_tesis">
+                                          <h4 class="panel-title">
+                                            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#ge_collapse_tesis" aria-expanded="false" aria-controls="ge_collapse_tesis">
+                                              <span class="glyphicon glyphicon-plus"></span>&nbsp;&nbsp;Tesis Dirigidas
+                                            </a>
+                                          </h4>
+                                        </div>
+                                        <div id="ge_collapse_tesis" class="panel-collapse collapse" role="tabpanel" aria-labelledby="ge_heading_tesis">
+                                          <div class="panel-body">
+                                              <button type="button" class="btn btn-outline-primary"><strong><a target="_blank" href="<?php echo esc_url($_ge_funcionario[0]['link-tesis']) ?>">Repositorio de Tesis UBB</a></strong></button>
+                                          </div>
+                                        </div>
                                       </div>
-                                    </div>
-                                  </div>
-                                   <?php  
+                                    <?php  
                                    }// Tesis
                                    ?>
                                    
