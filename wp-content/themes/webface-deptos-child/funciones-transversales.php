@@ -1,6 +1,28 @@
 <?php 
 
 //FUNCIÓN AUXILIAR
+function _get_all_meta_values_distinct_by_category_id($key, $idCategory){
+    global $wpdb;
+    $result = $wpdb->get_col(
+        $wpdb->prepare("
+            SELECT DISTINCT pm.meta_value FROM {$wpdb->postmeta} pm
+			LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
+            LEFT JOIN {$wpdb->term_relationships} tr ON p.ID = tr.object_id
+            LEFT JOIN {$wpdb->term_taxonomy} tt ON tr.term_taxonomy_id = tt.term_taxonomy_id
+            LEFT JOIN {$wpdb->terms} t ON tr.term_taxonomy_id = t.term_id
+			WHERE pm.meta_key = '%s'
+            AND (tt.term_id = %d OR tt.parent = %d)
+			AND p.post_status = 'publish'
+			ORDER BY pm.meta_value DESC",
+            [$key,
+            $idCategory,
+            $idCategory]
+        )
+    );
+    
+    return $result;
+}
+
 function _get_all_meta_values($key) {
     global $wpdb;
 	$result = $wpdb->get_col( 
@@ -9,7 +31,7 @@ function _get_all_meta_values($key) {
 			LEFT JOIN {$wpdb->posts} p ON p.ID = pm.post_id
 			WHERE pm.meta_key = '%s' 
 			AND p.post_status = 'publish'
-			ORDER BY pm.meta_value DESC", 
+			ORDER BY pm.meta_value DESC",
 			$key
 		) 
 	);
@@ -81,9 +103,7 @@ function set_event_title_contenidos( $data , $postarr ) {
     $subcategorias = wp_get_post_terms( $postarr['ID'],'ge_categoria_contenidos', array('order' => 'ASC', 'fields' => 'all')) ;
 
     foreach($subcategorias as $subcategoria){
-        if($subcategoria->parent != 0){
-            $categoria = $subcategoria->name;
-        }
+        $categoria = $subcategoria->name;
     } 
 
     $data['post_title'] = $_ge_contenido_anio." - ".$categoria;

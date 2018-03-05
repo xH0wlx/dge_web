@@ -43,7 +43,7 @@ get_header();
                                                 [
                                                     'taxonomy' => $term->taxonomy,
                                                     'field'    => 'slug',
-                                                    'terms'    => !empty( $_REQUEST['subterm'] ) ? $_REQUEST['subterm'] : $term->slug,//$term->slug,
+                                                    'terms'    => $term->slug
                                                 ]
                                                ],
                             ];
@@ -60,14 +60,6 @@ get_header();
                                 </h1>
                                 
                                 <?php 
-                
-                                    $args = array(
-                                        'parent' => $term->term_id,
-                                        'fields' => 'all',
-                                        'hide_empty' => true
-                                    );
-               
-                                    $hijosTerm = get_terms($term->taxonomy, $args) ;
                                     
                                     $key= '_ge_contenido_anio';
                                     $aniosProyectos = _get_all_meta_values_distinct_by_category_id($key, $term->term_id);
@@ -94,22 +86,6 @@ get_header();
                                                     </select>
                                                </div>
                                            </div>
-                                          <div class="col-xs-12 col-md-3">
-                                             <div class="form-group">
-                                                    <label for="subcategoria">Tipo:</label>
-                                                     <select id="subcategoria" name="subterm" class="form-control form-control-reset">
-                                                      <option value="" >-- Todas --</option>
-                                                         <?php
-                                                            foreach($hijosTerm as $term){
-                                                          ?>
-                                                              <option value="<?php echo $term->slug; ?>" <?php selected( $_REQUEST['subterm'], $term->slug ); ?> ><?php echo $term->name; ?></option>
-                                                         <?php  
-                                                            }
-                                                          ?>
-                                                      </select>
-                                             </div>
-                                              
-                                          </div>
                                            <div class="col-xs12 col-md-2">
                                                   <div class="form-group">
                                                        <label for="boton-formulario">&nbsp;</label>
@@ -162,16 +138,7 @@ get_header();
                                             </div>
                                             <div class="col-xs-9">
                                                 <div class="row text">
-                                                    <?php
-                                                    
-                                                        $subcategorias = wp_get_post_terms( get_the_ID(),'ge_categoria_contenidos', array('order' => 'ASC', 'fields' => 'all')) ;
-                                
-                                                        foreach($subcategorias as $subcategoria){
-                                                            if($subcategoria->parent != 0){
-                                                                echo $subcategoria->name."<br>";
-                                                            }
-                                                        } 
-                                                       
+                                                    <?php                                                       
                                                         echo "Año ";
                                                         echo !empty($_ge_contenido_anio[0])? $_ge_contenido_anio[0]: "";
                                                         echo "<br>";
@@ -208,7 +175,7 @@ get_header();
                                     
 								<?php endwhile;?>
 							<?php else: ?>
-								<h1>Lo sentimos, no se encontraron proyectos con el criterio buscado.</h1>
+								<h1>Lo sentimos, no se encontraron publicaciones con el criterio buscado.</h1>
 							<?php endif;?>
 							
 						

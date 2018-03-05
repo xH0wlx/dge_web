@@ -56,7 +56,7 @@
 							<div class="col-sm-5 col-lg-3">
 								<div class="search">
 									<form method="get" id="searchformtop" action="<?php bloginfo('url'); ?>/">
-										<input type="text" class="search-input" placeholder="Ingrese su busqueda..." value="<?php the_search_query(); ?>" name="s" id="s-top" />
+										<input type="text" class="search-input" placeholder="Ingrese su búsqueda..." value="<?php the_search_query(); ?>" name="s" id="s-top" />
 										<button type="submit" class="icon-only" id="searchsubmittop"><i class="fa fa-search" aria-hidden="true"></i></button>
 									</form>
 								</div>

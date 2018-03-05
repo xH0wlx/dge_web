@@ -27,7 +27,7 @@ get_header();
 						<h1><?php the_title(); ?></h1>
 						<br>
 						<div class="row">
-                             <div class="col-md-12">
+                             <div class="col-xs-12 content-p">
                                 <?php the_content(); ?>
                             </div>
 						</div><!-- FIN ROW -->
