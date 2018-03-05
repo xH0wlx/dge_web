@@ -162,6 +162,26 @@ class GE_Taxonomia {
           ];
     }    
     
+     // TIPO DE CONTENIDO
+    public function add_ge_taxonomy_contenidos($cpt_key){
+        
+          $labels = [
+            'name' => 'Categoría (Contenidos/Páginas)',
+            'singular_name' => 'Categoría'
+          ];
+
+          $args = [
+            'hierarchical' => true,
+            'labels'  => $labels,
+            'rewrite' => array( 'slug' => 'categoria-contenidos' )
+          ];
+
+          $this->taxonomias[] = [
+              'ge_taxonomy_key' => 'ge_categoria_contenidos',
+              'ge_post_key' => $cpt_key,
+              'args' => $args
+          ];
+    }    
     
     function registrar_taxonomias_agregadas(){
         

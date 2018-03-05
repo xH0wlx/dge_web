@@ -47,6 +47,8 @@ class GE_Admin {
         // CPT FUNCIONARIOS -> SLUG: descargas REGISTRO: ge_descargas
     private $ge_descargas = "ge_descargas";
     
+    private $ge_contenidos = "ge_contenidos";
+    
     /**
      * @param string $version La versión actual.
      */
@@ -178,6 +180,7 @@ class GE_Admin {
     public function ge_registrar_cpts(){
         $ge_cpts = new GE_CPT();
         $ge_cpts->add_ge_cpt_funcionarios($this->ge_funcionarios);
+        $ge_cpts->add_ge_cpt_ordenables($this->ge_contenidos);
         $ge_cpts->add_ge_cpt_descargas($this->ge_descargas);
         $ge_cpts->run();
     }
@@ -189,6 +192,9 @@ class GE_Admin {
         
         //DESCARGAS
         $ge_taxonomias->add_ge_taxonomy_categoria_archivos($this->ge_descargas);
+        
+        //CONTENIDOS
+        $ge_taxonomias->add_ge_taxonomy_contenidos($this->ge_contenidos);
         
         $ge_taxonomias->run();
         
@@ -214,6 +220,8 @@ class GE_Admin {
         GE_MetaboxCreator::createFuncionariosMetabox($this->ge_funcionarios);
         
         GE_MetaboxCreator::createDescargasMetabox($this->ge_descargas);
+        
+        GE_MetaboxCreator::createContenidosMetabox($this->ge_contenidos);
     }
     
     /*
@@ -233,6 +241,10 @@ class GE_Admin {
         
         if ( $this->ge_descargas == $post_type ){
             GE_MetaboxCreator::saveDescargasMetabox($post_id, $post, $update);
+        }
+        
+        if ( $this->ge_contenidos == $post_type ){
+            GE_MetaboxCreator::saveContenidosMetabox($post_id, $post, $update);
         }
     }
     /**

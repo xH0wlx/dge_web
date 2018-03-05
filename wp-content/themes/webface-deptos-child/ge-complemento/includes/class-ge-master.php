@@ -51,6 +51,7 @@ class GE_Master {
 	 * @var      string    $ge_filters_functions  La clase para las funciones de filtros
 	 */
     protected $ge_filters_functions;
+    protected $ge_filters_functions_co;
     
     /**
      * Versión actual
@@ -60,6 +61,8 @@ class GE_Master {
 	 * @var      string    $ge_filters_query  La clase para las funciones de filtros en edit.php
 	 */
     protected $ge_filters_query;
+    
+    protected $ge_filters_query_co;
     
     /**
      * Constructor
@@ -125,11 +128,17 @@ class GE_Master {
 		 * La clase responsable de las funciones de los filtros
 		 */
         require_once GE_EXTENSION_DIR_PATH . 'includes/class-ge-filters/class-ge-filter-functions.php';
+        require_once GE_EXTENSION_DIR_PATH . 'includes/class-ge-filters/class-ge-filter-functions-contenido-ordenable.php';
         
         /**
 		 * La clase responsable de las funciones de los filtros en edit.php
 		 */
-        require_once GE_EXTENSION_DIR_PATH . 'includes/class-ge-filters/class-ge-filter-query.php';   
+        require_once GE_EXTENSION_DIR_PATH . 'includes/class-ge-filters/class-ge-filter-query.php';
+        
+         /**
+		 * La clase responsable de las funciones de los filtros en edit.php para contenidos ordenables
+		 */
+        require_once GE_EXTENSION_DIR_PATH . 'includes/class-ge-filters/class-ge-filter-query-contenido-ordenable.php';   
         
          /**
 		 * La clase responsable de definir todas las acciones en el
@@ -160,8 +169,10 @@ class GE_Master {
         $this->cargador             = new GE_Cargador;
         
         $this->ge_admin             = new GE_Admin( $this->get_version() );
-        $this->ge_filters_functions = new GE_FiltersFunctions();     
+        $this->ge_filters_functions = new GE_FiltersFunctions();    
+        $this->ge_filters_functions_co = new GE_FiltersFunctionsCO();    
         $this->ge_filters_query     = new GE_FiltersQuery();
+        $this->ge_filters_query_co     = new GE_FiltersQueryCO();
         
         $this->ge_public            = new GE_Public( $this->get_version() );
    
@@ -193,8 +204,10 @@ class GE_Master {
         
         // Acciones para filtros (Se usa precargador porque se necesita cargar el filtro antes del hook)
         $this->pre_cargador->add_action( 'manage_ge_funcionarios_posts_custom_column', $this->ge_filters_functions, 'ge_funcionarios_custom_column_content' );
+        $this->pre_cargador->add_action( 'manage_ge_contenidos_posts_custom_column', $this->ge_filters_functions_co, 'ge_contenidos_custom_column_content' );
         
         $this->cargador->add_action( 'restrict_manage_posts', $this->ge_filters_query,'ge_admin_posts_filter_restrict_manage_posts' );
+        $this->cargador->add_action( 'restrict_manage_posts', $this->ge_filters_query_co,'ge_admin_posts_filter_restrict_manage_posts' );
 
     }
     
@@ -208,8 +221,10 @@ class GE_Master {
         $this->cargador->add_filter( 'enter_title_here', $this->ge_filters_functions, 'ge_change_title_text' );
 
         $this->cargador->add_filter( 'parse_query', $this->ge_filters_query, 'ge_posts_filter' );
+        $this->cargador->add_filter( 'parse_query', $this->ge_filters_query_co, 'ge_posts_filter' );
         
         $this->pre_cargador->add_filter( 'manage_ge_funcionarios_posts_columns', $this->ge_filters_functions, 'ge_funcionarios_modify_columns' );
+        $this->pre_cargador->add_filter( 'manage_ge_contenidos_posts_columns', $this->ge_filters_functions_co, 'ge_contenidos_modify_columns' );
     }
         
     /**

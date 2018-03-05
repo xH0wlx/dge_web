@@ -130,3 +130,12 @@ li#ubb {
  background-position: center; 
  display: block;
 }
+/*--------------------------------------------------------------
+# BOOTSTRAP
+--------------------------------------------------------------*/
+
+.form-control-reset{
+	background-color: #fff !important;
+	border: 1px solid #ccc !important;
+	border-radius: 4px !important;
+}

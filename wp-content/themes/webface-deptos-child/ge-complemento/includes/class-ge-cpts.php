@@ -212,6 +212,102 @@ class GE_CPT {
     }
     
     
+     public function add_ge_cpt_ordenables($cpt_key){
+        
+          $labels = $this->ge_cpt_labels_ordenables('Contenido', 'Contenidos');
+
+          $args = [
+            'labels' => $labels,
+            'public' => true,
+            //'hierarchical' => true,
+            //'has_archive' => true,
+            'supports' => array('editor', 'thumbnail'/*, 'page-attributes', 'custom-fields'*/),
+            'capability_type' => "post",
+            'show_ui' => true,
+            //'show_in_menu' => 'edit.php?post_type=estructura',
+            'show_in_nav_menus' => true,
+            'menu_position' => 5,
+            'menu_icon' => 'dashicons-editor-ol',
+            'publicly_queryable' => true, //ej ?producto=camiseta
+            'query_var' => true,
+            'rewrite' => [
+              'slug' => "contenido"
+            ]
+            //'show_in_admin_bar' => false
+          ];
+
+          $this->cpts[] = [
+              'ge_post_key' => $cpt_key,
+              'args' => $args
+          ];
+        
+          add_filter( 'post_updated_messages', [self::class, 'ge_ordenables_updated_messages']);
+    }
+                
+    function ge_cpt_labels_ordenables($singular_name, $plural_name){
+        $singular = $singular_name;
+        $plurarl = $plural_name;
+        $ucfirstSingular = ucfirst($singular);
+        $ucfirstPlural = ucfirst($plurarl);
+        
+        $labels = [
+            'name' => $ucfirstPlural,
+            //'menu_name' => "Prueba",  
+            'singular_name' => $ucfirstSingular,
+            'add_new' => "Añadir nuevo $singular",
+            'add_new_item' => "Añadir nuevo $singular",
+            'edit_item' => "Editar $singular",
+            'new_item' => "Nuevo $singular",
+            'view_item' => "Ver $singular",
+            'view_items' => "Ver $plurarl",
+            'search_items' => "Buscar $plurarl",
+            'not_found' => $ucfirstSingular." no encontrado",
+            'not_found_in_trash' => $ucfirstSingular." no encontrado en la papelera",
+            'all_items' => "Todos los $plurarl",
+            'archives' => "Archivo de $plurarl",
+            'attributes' => "Atributos del $singular",
+            'insert_into_item' => "Insertar en $singular",
+            'uploaded_to_this_item' => "Subido a $singular",
+            'featured_image' => "Imagen del $singular",
+            'set_featured_image' => "Establecer imagen del $singular",
+            'remove_featured_image' => "Remover imagen del $singular",
+            'use_featured_image' => "Usar como imagen del $singular",
+            'filter_items_list' => "Filtrar lista de $plurarl",
+            'items_list_navigation' => "Navegación de lista de $plurarl",
+            'items_list' => "Lista de $plurarl"
+        ];
+        
+        return $labels;
+    }
+    
+    function ge_ordenables_updated_messages ( $msg ) {
+        $msg[ 'ge_contenidos' ] = array (
+             0 => '', // Unused. Messages start at index 1.
+         1 => "Datos del contenido actualizados.",
+               // or simply "Actor updated.",
+               // natural language "The actor's profile has been updated successfully.",
+               // or what you need "Actor updated, so remember to check also <strong>the films list</strong>."
+
+
+         2 => 'Campo personalizado actualizado.',  // Probably better do not touch
+         3 => 'Campo personalizado eliminado.',  // Probably better do not touch
+
+         4 => "Datos del contenido actualizados.",
+         5 => "Datos del contenido restaurados para revisión",
+         6 => "Datos del contenido publicados.",
+                // you can use the kind of messages that better fits with your needs
+            // 6 => "Good boy, one more... so, 4,999,999 are to reach IMDB.",
+            // 6 => "This actor is already on the website.",
+            // 6 => "Congratulations, a new Actor's profile has been published.",
+
+         7 => "Datos del contenido guardados.",
+         8 => "Datos del contenido enviados.",
+         9 => "Datos del contenido agendados.",
+        10 => "Datos del contenido (borrador) actualizados.",
+        );
+        return $msg;
+    }
+    
     
     public function registrar_cpts_agregados(){
         

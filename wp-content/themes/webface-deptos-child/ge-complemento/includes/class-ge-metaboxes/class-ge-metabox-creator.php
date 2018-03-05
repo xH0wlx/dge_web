@@ -6,6 +6,8 @@ require_once('ge-mb-trabajo-actualidad.php');
 
 require_once('ge-mb-descargas-media.php');
 
+require_once('ge-mb-contenido-anio.php');
+
 abstract class GE_MetaboxCreator{
     
     static function createFuncionariosMetabox($post_type_key){
@@ -28,5 +30,13 @@ abstract class GE_MetaboxCreator{
     
     static function saveDescargasMetabox($post_id, $post, $update){
         GE_MB_DescargaMedia::save($post_id, $post, $update);
+    }
+    
+    static function createContenidosMetabox($post_type_key){
+        GE_MB_Anio::add($post_type_key);
+    }
+    
+    static function saveContenidosMetabox($post_id, $post, $update){
+        GE_MB_Anio::save($post_id, $post, $update);
     }
 }
