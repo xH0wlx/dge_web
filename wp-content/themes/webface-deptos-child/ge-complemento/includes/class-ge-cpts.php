@@ -221,7 +221,7 @@ class GE_CPT {
             'public' => true,
             //'hierarchical' => true,
             //'has_archive' => true,
-            'supports' => array('editor', 'thumbnail'/*, 'page-attributes', 'custom-fields'*/),
+            'supports' => array('editor'/*, 'page-attributes', 'custom-fields'*/),
             'capability_type' => "post",
             'show_ui' => true,
             //'show_in_menu' => 'edit.php?post_type=estructura',

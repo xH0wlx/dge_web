@@ -168,8 +168,21 @@ get_header();
                                         <div class="row">
                                             <div class="col-xs-3">
                                                 <div class="row thum">
-                                                    <?php if ( has_post_thumbnail() ) {
-                                                    the_post_thumbnail('thumbnail', array('class' => 'structure-thum' ));
+                                                <?php 
+                                                
+                                                $subcategorias = wp_get_post_terms( get_the_ID(),'ge_categoria_contenidos', array('order' => 'ASC', 'fields' => 'all')) ;
+
+                                                if ( !empty($subcategorias) ) {
+                                                    $ultimaCategoriaPathImagen = '';
+                                                    foreach($subcategorias as $subcategoria){
+                                                            if($subcategoria->parent != 0){
+                                                                $ultimaCategoriaPathImagen = get_option("taxonomy_$subcategoria->term_id");
+                                                            }
+                                                    }
+                                                    $ultimaCategoriaPathImagen = ($ultimaCategoriaPathImagen == '') ? 
+                                                        get_template_directory_uri()."/images/default-medium.jpg": $ultimaCategoriaPathImagen;
+                                                    
+                                                    echo '<img class="structure-thum" src="' . $ultimaCategoriaPathImagen .'"/>';
                                                 }
                                                 else {
                                                     echo '<img class="structure-thum" src="' . get_template_directory_uri()."/images/default-medium.jpg".'"/>';
@@ -179,9 +192,7 @@ get_header();
                                             <div class="col-xs-9">
                                                 <div class="row text">
                                                     <?php
-                                                    
-                                                        $subcategorias = wp_get_post_terms( get_the_ID(),'ge_categoria_contenidos', array('order' => 'ASC', 'fields' => 'all')) ;
-                                
+                                                                                    
                                                         foreach($subcategorias as $subcategoria){
                                                             if($subcategoria->parent != 0){
                                                                 echo $subcategoria->name."<br>";

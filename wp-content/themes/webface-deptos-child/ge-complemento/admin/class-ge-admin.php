@@ -144,36 +144,40 @@ class GE_Admin {
         // Condicional para controlar la carga de los archivos solamente en la página de extension custom post type
         global $post;
 
-        if ( !($hook == 'post-new.php' || $hook == 'post.php') ) {
-            return;
+        if ( $hook == 'post-new.php' || $hook == 'post.php' ) {
+            if ( $this->ge_funcionarios == $post->post_type ){
+               /*
+                * Sweet Alert
+                * http://t4t5.github.io/sweetalert/
+                */
+                wp_enqueue_media();
+
+                wp_enqueue_script( 'ge_sweet_alert_js', GE_EXTENSION_DIR_URL . 'helpers/sweetalert-master/dist/sweetalert.min.js', ['jquery'], $this->version, true );
+
+                wp_enqueue_script( 'ge_js_admin', GE_EXTENSION_DIR_URL . 'admin/js/ge-funcionarios.js', ['jquery'], $this->version, true );
+
+                wp_enqueue_script( 'ge_js_bootstrap', GE_EXTENSION_DIR_URL . 'helpers/bootstrap-4.0.0-beta.3-dist/js/bootstrap.min.js', ['jquery'], $this->version, true );
+
+            }
+            if( $this->ge_descargas == $post->post_type ){
+                wp_enqueue_script( 'ge_sweet_alert_js', GE_EXTENSION_DIR_URL . 'helpers/sweetalert-master/dist/sweetalert.min.js', ['jquery'], $this->version, true );
+
+                wp_enqueue_script( 'ge_js_admin_descargas', GE_EXTENSION_DIR_URL . 'admin/js/ge-descargas.js', ['jquery'], $this->version, true );
+
+                wp_enqueue_script( 'ge_js_bootstrap', GE_EXTENSION_DIR_URL . 'helpers/bootstrap-4.0.0-beta.3-dist/js/bootstrap.min.js', ['jquery'], $this->version, true );
+            }
         }
     
-        if ( $this->ge_funcionarios == $post->post_type ){
-           /*
-            * Sweet Alert
-            * http://t4t5.github.io/sweetalert/
-            */
+        
+        if( isset($_GET['taxonomy']) && $_GET['taxonomy'] == 'ge_categoria_contenidos') {
             wp_enqueue_media();
             
-            wp_enqueue_script( 'ge_sweet_alert_js', GE_EXTENSION_DIR_URL . 'helpers/sweetalert-master/dist/sweetalert.min.js', ['jquery'], $this->version, true );
-            
-            wp_enqueue_script( 'ge_js_admin', GE_EXTENSION_DIR_URL . 'admin/js/ge-funcionarios.js', ['jquery'], $this->version, true );
-            
-            wp_enqueue_script( 'ge_js_bootstrap', GE_EXTENSION_DIR_URL . 'helpers/bootstrap-4.0.0-beta.3-dist/js/bootstrap.min.js', ['jquery'], $this->version, true );
+            wp_enqueue_script( 'ge_js_admin_categoria_contenidos', GE_EXTENSION_DIR_URL . 'admin/js/ge-categoria-contenidos.js', ['jquery'], $this->version, true );
 
         }
-        if( $this->ge_descargas == $post->post_type ){
-            wp_enqueue_script( 'ge_sweet_alert_js', GE_EXTENSION_DIR_URL . 'helpers/sweetalert-master/dist/sweetalert.min.js', ['jquery'], $this->version, true );
-            
-            wp_enqueue_script( 'ge_js_admin_descargas', GE_EXTENSION_DIR_URL . 'admin/js/ge-descargas.js', ['jquery'], $this->version, true );
-            
-            wp_enqueue_script( 'ge_js_bootstrap', GE_EXTENSION_DIR_URL . 'helpers/bootstrap-4.0.0-beta.3-dist/js/bootstrap.min.js', ['jquery'], $this->version, true );
-        }
-
-
         
         //SE USA TRUE COMO ÚLTIMO PARÁMETRO PARA QUE LO AGREGUE ANTES DE LA ETIQUETA CIERRE DE BODY
-        wp_enqueue_script( 'ge_css_admin', GE_EXTENSION_DIR_URL . 'admin/js/ge-admin.js', ['jquery'], $this->version, true );
+        //wp_enqueue_script( 'ge_css_admin', GE_EXTENSION_DIR_URL . 'admin/js/ge-admin.js', ['jquery'], $this->version, true );
         
     }
     

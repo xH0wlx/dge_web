@@ -64,6 +64,8 @@ class GE_Master {
     
     protected $ge_filters_query_co;
     
+    protected $ge_extra_fields_contenidos;
+    
     /**
      * Constructor
 	 *
@@ -141,6 +143,11 @@ class GE_Master {
         require_once GE_EXTENSION_DIR_PATH . 'includes/class-ge-filters/class-ge-filter-query-contenido-ordenable.php';   
         
          /**
+		 * La clase responsable de agregar un extra field en la categoría de contenidos ordenables
+		 */
+        require_once GE_EXTENSION_DIR_PATH . 'includes/class-ge-extra-fields/ge-ef-taxonomy-contenidos.php';   
+        
+         /**
 		 * La clase responsable de definir todas las acciones en el
          * área de administración
 		 */
@@ -165,16 +172,18 @@ class GE_Master {
     private function cargar_instancias() {
         
         // Crea una instancia del cargador que se utilizará para registrar los ganchos con WordPress.
-        $this->pre_cargador         = new GE_Pre_Cargador;
-        $this->cargador             = new GE_Cargador;
+        $this->pre_cargador                 = new GE_Pre_Cargador;
+        $this->cargador                     = new GE_Cargador;
         
-        $this->ge_admin             = new GE_Admin( $this->get_version() );
-        $this->ge_filters_functions = new GE_FiltersFunctions();    
-        $this->ge_filters_functions_co = new GE_FiltersFunctionsCO();    
-        $this->ge_filters_query     = new GE_FiltersQuery();
-        $this->ge_filters_query_co     = new GE_FiltersQueryCO();
+        $this->ge_admin                     = new GE_Admin( $this->get_version() );
+        $this->ge_filters_functions         = new GE_FiltersFunctions();    
+        $this->ge_filters_functions_co      = new GE_FiltersFunctionsCO();    
+        $this->ge_filters_query             = new GE_FiltersQuery();
+        $this->ge_filters_query_co          = new GE_FiltersQueryCO();
         
-        $this->ge_public            = new GE_Public( $this->get_version() );
+        $this->ge_extra_fields_contenidos   = new GE_EF_Imagen();
+        
+        $this->ge_public                    = new GE_Public( $this->get_version() );
    
     }
     
@@ -208,6 +217,12 @@ class GE_Master {
         
         $this->cargador->add_action( 'restrict_manage_posts', $this->ge_filters_query,'ge_admin_posts_filter_restrict_manage_posts' );
         $this->cargador->add_action( 'restrict_manage_posts', $this->ge_filters_query_co,'ge_admin_posts_filter_restrict_manage_posts' );
+        
+        //EXTRA FIELDS PARA CATEGORÍA CONTENIDOS
+        $this->cargador->add_action( 'ge_categoria_contenidos_add_form_fields', $this->ge_extra_fields_contenidos,'categoria_contenido_add_new_meta_fields', 10, 2 );
+        $this->cargador->add_action( 'ge_categoria_contenidos_edit_form_fields', $this->ge_extra_fields_contenidos,'categoria_contenido_edit_meta_fields', 10, 2 );
+        $this->cargador->add_action( 'create_ge_categoria_contenidos', $this->ge_extra_fields_contenidos,'categoria_contenido_save_custom_meta', 10, 2 );
+        $this->cargador->add_action( 'edited_ge_categoria_contenidos', $this->ge_extra_fields_contenidos,'categoria_contenido_save_custom_meta', 10, 2 );
 
     }
     

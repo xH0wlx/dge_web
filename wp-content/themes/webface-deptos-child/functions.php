@@ -15,6 +15,7 @@ endif;
 
 add_action('init','delete_post_type', 100);
 
+
 require_once get_template_directory() . '/../webface-deptos-child/funciones-transversales.php' ;
 
 require_once get_template_directory() . '/../webface-deptos-child/ge-complemento/gestion-empresarial-complemento.php' ;
