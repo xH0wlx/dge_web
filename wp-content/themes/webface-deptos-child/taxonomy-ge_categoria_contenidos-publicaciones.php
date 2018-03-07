@@ -86,7 +86,7 @@ get_header();
                                                     </select>
                                                </div>
                                            </div>
-                                           <div class="col-xs12 col-md-2">
+                                           <div class="col-xs-12 col-md-2">
                                                   <div class="form-group">
                                                        <label for="boton-formulario">&nbsp;</label>
                                                         <button id="boton-formulario" class="btn btn-primary btn-block" type="submit">
