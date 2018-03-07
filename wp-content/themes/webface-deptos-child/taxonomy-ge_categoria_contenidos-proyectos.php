@@ -25,17 +25,38 @@ get_header();
 					</div>
 		
 				      		<?php
+                
+                            $metaKeyContenidoAnio = '_ge_contenido_anio';
   
                             $page = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 
                             $term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
                 
+                            if( !isset( $_REQUEST['anioproyecto'] ) && !isset( $_REQUEST['subterm'] ) && !get_query_var( 'paged' ) ){       
+                                //MUESTRA INICIAL
+                                $args = array(
+                                    'parent' => $term->term_id,
+                                    'fields' => 'ids',
+                                    'hide_empty' => true
+                                );
+
+                                $proyectoTaxonomy = $term->taxonomy;
+
+                                $hijosTermIdes = get_terms($proyectoTaxonomy, $args) ;
+
+                                $maxValueYearProyectos = _get_max_meta_value_by_terms_id($metaKeyContenidoAnio, $hijosTermIdes);
+        
+                                $anioPrimerPagina = $maxValueYearProyectos;
+                            }else{
+                                $anioPrimerPagina = '';
+                            }
+                
                             $args = [
                                 'post_type' => 'ge_contenidos',
                                 'paged' => $page,
-                                'posts_per_page' => get_query_var('posts_per_page'),
-                                'meta_key' => '_ge_contenido_anio',
-                                'meta_value' => !empty( $_REQUEST['anioproyecto'] ) ? $_REQUEST['anioproyecto'] : '',
+                                //'posts_per_page' => get_query_var('posts_per_page'),
+                                'meta_key' => $metaKeyContenidoAnio,
+                                'meta_value' => !empty( $_REQUEST['anioproyecto'] ) ? $_REQUEST['anioproyecto'] : $anioPrimerPagina,
                                 'meta_compare' => '=',
                                 'orderby' => 'meta_value_num',
                                 'order' => 'DESC',
@@ -52,12 +73,7 @@ get_header();
                 
 							if ( have_posts() ) : ?>
                             
-							    <h1><?php 
-                                    $titulo = mb_strtolower($term->slug, 'UTF-8');
-                                    echo $titulo;
-                                    
-                                    ?>
-                                </h1>
+							    <h1><?php echo mb_strtolower($term->slug, 'UTF-8'); ?></h1>
                                 
                                 <?php 
                 
@@ -69,8 +85,7 @@ get_header();
                
                                     $hijosTerm = get_terms($term->taxonomy, $args) ;
                                     
-                                    $key= '_ge_contenido_anio';
-                                    $aniosProyectos = _get_all_meta_values_distinct_by_category_id($key, $term->term_id);
+                                    $aniosProyectos = _get_all_meta_values_distinct_by_category_id($metaKeyContenidoAnio, $term->term_id);
                 
                                 ?>
                                 
@@ -86,8 +101,9 @@ get_header();
                                                       <option value=""  >-- Todos --</option>
                                                          <?php
                                                             foreach($aniosProyectos as $anio){
+                                                                $anioSelected = isset($_REQUEST['anioproyecto'])? $_REQUEST['anioproyecto'] : $anioPrimerPagina;
                                                           ?>
-                                                              <option value="<?php echo $anio; ?>" <?php selected( $_REQUEST['anioproyecto'], $anio ); ?> ><?php echo $anio; ?></option>
+                                                              <option value="<?php echo $anio; ?>" <?php selected( $anioSelected, $anio ); ?> ><?php echo $anio; ?></option>
                                                         <?php  
                                                             }
                                                           ?>
@@ -144,8 +160,8 @@ get_header();
                                     ?>
 
 									<?php
-                                      if( !empty(get_post_meta($post->ID, '_ge_contenido_anio')) ){
-                                        $_ge_contenido_anio = get_post_meta($post->ID, '_ge_contenido_anio'); 
+                                      if( !empty(get_post_meta($post->ID, $metaKeyContenidoAnio)) ){
+                                        $_ge_contenido_anio = get_post_meta($post->ID, $metaKeyContenidoAnio); 
                                       }
                                     ?>
 							        <div class="col-sm-12 col-md-6 structure-box" style="min-height: 0px;">
